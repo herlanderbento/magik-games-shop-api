@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Categories {
+  id          String     @id @default(uuid())
+  name        String     @db.VarChar(255)
+  description String?
+  createdAt   DateTime
+  updatedAt   DateTime
+  products    Products[]
+}
+
+model Products {
+  id          String   @id @default(uuid())
+  categoryId  String
+  name        String   @db.VarChar(255)
+  slug        String
+  description String?
+  image       String?
+  price       Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  orderItems OrderItems[]
+  category   Categories   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId])
+}
+
+model Orders {
+  id         String       @id @default(uuid())
+  customerId String       @default(uuid())
+  total      Int
+  status     Status
+  createdAt  DateTime
+  items      OrderItems[]
+}
+
+model OrderItems {
+  id        String   @id @default(uuid())
+  orderId   String   @default(uuid())
+  productId String   @default(uuid())
+  quantity  Int
+  price     Float
+  createdAt DateTime
+
+  order   Orders   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Products @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+enum Status {
+  PENDING
+  PAID
+  FAILED
+}

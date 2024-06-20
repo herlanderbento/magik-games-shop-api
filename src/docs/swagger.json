@@ -1,0 +1,252 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Email Service API - Mirantes Technologies",
+    "description": "Microsservice Email API, documentation for developers",
+    "version": "1.0.1"
+  },
+  "paths": {
+    "/api/v1/customers": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Create customer",
+        "description": "Create a customer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "required": true,
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "companyName": {
+                    "required": true,
+                    "type": "string",
+                    "example": "Company, LTDA"
+                  },
+                  "email": {
+                    "required": true,
+                    "type": "string",
+                    "example": "john.doe@company.com"
+                  },
+                  "phone": {
+                    "required": true,
+                    "type": "string",
+                    "example": "244912345678"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "1b327ed1-a2bc-4cce-9d37-38a8964ce0ed"
+                        },
+                        "name": {
+                          "required": true,
+                          "type": "string",
+                          "example": "John Doe"
+                        },
+                        "companyName": {
+                          "required": true,
+                          "type": "string",
+                          "example": "Company, LTDA"
+                        },
+                        "email": {
+                          "required": true,
+                          "type": "string",
+                          "example": "john.doe@company.com"
+                        },
+                        "phone": {
+                          "required": true,
+                          "type": "string",
+                          "example": "244912345678"
+                        },
+                        "createdAt": {
+                          "required": true,
+                          "type": "string",
+                          "example": "2024-05-10T15:12:27.744Z"
+                        },
+                        "updatedAt": {
+                          "required": true,
+                          "type": "string",
+                          "example": "2024-05-10T15:12:27.744Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "example": "name is a required field"
+                        },
+                        "companyName": {
+                          "type": "string",
+                          "example": "companyName is a required field"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "email is a required field"
+                        },
+                        "phone": {
+                          "type": "string",
+                          "example": "phone is a required field"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "list customers",
+        "description": "list customers",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "path",
+            "description": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "page",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "path",
+            "description": "perPage",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "example": "1b327ed1-a2bc-4cce-9d37-38a8964ce0ed"
+                            },
+                            "name": {
+                              "required": true,
+                              "type": "string",
+                              "example": "John Doe"
+                            },
+                            "companyName": {
+                              "required": true,
+                              "type": "string",
+                              "example": "Company, LTDA"
+                            },
+                            "email": {
+                              "required": true,
+                              "type": "string",
+                              "example": "john.doe@company.com"
+                            },
+                            "phone": {
+                              "required": true,
+                              "type": "string",
+                              "example": "244912345678"
+                            },
+                            "createdAt": {
+                              "required": true,
+                              "type": "string",
+                              "example": "2024-05-10T15:12:27.744Z"
+                            },
+                            "updatedAt": {
+                              "required": true,
+                              "type": "string",
+                              "example": "2024-05-10T15:12:27.744Z"
+                            }
+                          }
+                        },
+                        "total": {
+                          "type": "number",
+                          "example": "15"
+                        },
+                        "currentPage": {
+                          "type": "number",
+                          "example": "15"
+                        },
+                        "lastPage": {
+                          "type": "number",
+                          "example": "15"
+                        },
+                        "perPage": {
+                          "type": "number",
+                          "example": "15"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-access-token"
+      }
+    }
+  }
+}

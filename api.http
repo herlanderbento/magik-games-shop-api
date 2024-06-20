@@ -1,0 +1,115 @@
+@hostname = localhost
+@port = 4001
+@host = {{hostname}}:{{port}}/api/v1
+@contentType = application/json
+
+### create categories
+POST http://{{host}}/categories
+Content-Type: {{contentType}}
+
+{
+  "name": "Computers",
+  "description": "Check each product page for other buying options."
+}
+
+
+### list categories
+GET http://{{host}}/categories
+Content-Type: {{contentType}}
+
+### get category
+GET http://{{host}}/categories/0f9fdf50-7240-4610-800e-abfd4dfc20f1
+Content-Type: {{contentType}}
+
+### update category
+PUT http://{{host}}/categories/0f9fdf50-7240-4610-800e-abfd4dfc20f9
+Content-Type: {{contentType}}
+
+{
+  "name": "some-category",
+  "description": "some description"
+}
+
+### delet category
+DELETE  http://{{host}}/categories/7831801f-bc4a-48eb-9584-0e384b7f835e
+Content-Type: {{contentType}}
+
+### create order
+POST http://{{host}}/orders
+Content-Type: {{contentType}}
+
+{
+  "customerId": "1b026c21-2ef1-409f-b803-04dd004a3ff2",
+  "countryCode": "PT",
+  "currencyCode": "EUR",
+  "items": [
+    {
+      "productId": "c6592440-57f3-4259-9317-1e582bf573cd",
+      "quantity": 2
+    }
+  ]
+}
+
+### get order
+GET http://{{host}}/orders/1b026c21-2ef1-409f-b803-04dd004a3ff2
+Content-Type: {{contentType}}
+
+### delete order
+DELETE  http://{{host}}/orders/d03fdf28-156c-441c-8b9f-2443315b55f9
+Content-Type: {{contentType}}
+
+### create product
+POST http://{{host}}/products
+Content-Type: {{contentType}}
+
+{
+  "categoryId": "0f9fdf50-7240-4610-800e-abfd4dfc20f9",
+  "name": "Laptop Samsung Galaxy PRO 3",
+  "description": "Save time with card offload speeds of up to 200MB/s powered by SanDisk QuickFlow Technology (Up to 200MB/s read speeds.",
+  "price": 652.42,
+  "image": "https://media.licdn.com/dms/image/D4E22AQGlNjDfIs2lew/feedshare-shrink_800/0/1718865016429?e=1721865600&v=beta&t=Ota1r3eiXzBupVvqC1CcGAb6GadsIVAvdd7_pr2ZSAI"
+}
+
+
+### create product
+PATCH  http://{{host}}/products/e729267c-6628-4cd0-8093-85788c1c84d4
+Content-Type: {{contentType}}
+
+{
+  "categoryId": "3da41f9c-1c35-4b7d-a77f-4dec9cb08794",
+  "name": "Laptop Samsung Galaxy PRO2",
+  "description": "Save time with card offload speeds of up to 200MB/s powered by SanDisk QuickFlow Technology (Up to 200MB/s read speeds.",
+  "price": [
+    {
+      "currencyCode": "EUR",
+      "price": 13800,
+      "countryCode": "PT"
+    },
+    {
+      "currencyCode": "USD",
+      "price": 77800,
+      "countryCode": "US"
+    },
+     {
+      "currencyCode": "AOA",
+      "price": 1000,
+      "countryCode": "AO"
+    }
+  ],
+  "photo": "imgUrl",
+  "size": [
+    "Medio"
+  ],
+  "colors": [
+    "Cinza"
+  ]
+}
+
+### create product
+DELETE http://{{host}}/products/c6592440-57f3-4259-9317-1e582bf573cd
+Content-Type: {{contentType}}
+
+### list products
+GET http://{{host}}/products?countryCode=GB
+Content-Type: {{contentType}}
+

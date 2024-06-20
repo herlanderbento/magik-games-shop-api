@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    command: ./.docker/start.sh
+    container_name: magik-games-shop-api
+    ports: 
+      - 4000:3000
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}?schema=public
+    volumes: 
+      - .:/home/node/app
+    depends_on:
+      - postgresql
+
+  postgresql:
+    container_name: magik-games-shop-postgresql
+    image: postgres:9.4
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/magik-games-shop-postgresql
+
+volumes:
+  postgres_data:
+    driver: local
+    
