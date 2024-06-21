@@ -1,4 +1,4 @@
-import { ProductOutputProps } from '../../common';
+import { ProductOutput } from '../../common';
 
 export type CreateProductInput = {
   categoryId: string;
@@ -8,4 +8,4 @@ export type CreateProductInput = {
   image?: string | null;
 };
 
-export type CreateProductOutput = ProductOutputProps;
+export type CreateProductOutput = ProductOutput;

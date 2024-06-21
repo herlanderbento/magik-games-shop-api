@@ -33,7 +33,11 @@ export class Category extends AggregateRoot<CategoryProps> {
     id?: EntityID
   ): Category {
     return new Category(
-      { ...props, createdAt: new Date(), updatedAt: new Date() },
+      {
+        ...props,
+        createdAt: props.createdAt ?? new Date(),
+        updatedAt: props.updatedAt ?? new Date(),
+      },
       id
     );
   }
@@ -41,7 +45,7 @@ export class Category extends AggregateRoot<CategoryProps> {
   update(props: Partial<CategoryProps>): void {
     Object.assign(this.props, { ...props, updatedAt: new Date() });
   }
-  
+
   toJSON() {
     return {
       id: this.id.toString(),
@@ -49,6 +53,6 @@ export class Category extends AggregateRoot<CategoryProps> {
       description: this.props.description,
       createdAt: this.props.createdAt,
       updatedAt: this.props.updatedAt,
-    }; 
+    };
   }
 }

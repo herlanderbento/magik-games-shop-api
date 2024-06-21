@@ -12,14 +12,11 @@ export class CategorySearchParams extends SearchParams<CategoryFilter> {}
 export class CategorySearchResult extends SearchResult<Category> {}
 
 export interface ICategoryRepository
-  extends Omit<
-    ISearchableRepository<
-      Category,
-      CategoryFilter,
-      CategorySearchParams,
-      CategorySearchResult
-    >,
-    'findByIds'
+  extends ISearchableRepository<
+    Category,
+    CategoryFilter,
+    CategorySearchParams,
+    CategorySearchResult
   > {
   findByName(name: string): Promise<Category | null>;
 }

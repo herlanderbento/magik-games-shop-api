@@ -61,8 +61,8 @@ export class Product extends AggregateRoot<ProductProps> {
       {
         ...props,
         slug: props.slug ?? Slug.createFromText(props.name),
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: props.createdAt ?? new Date(),
+        updatedAt: props.updatedAt ?? new Date(),
       },
       id
     );

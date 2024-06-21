@@ -39,8 +39,17 @@ export class ProductPrismaRepository implements IProductRepository {
       throw new NotFoundError(id, this.getEntity());
     }
 
-    //@ts-ignore
-    return modelProps ? modelProps : null;
+    return modelProps ? ProductPrismaMapper.toEntity(modelProps) : null;
+  }
+
+  async findBySlug(slug: string): Promise<Product | null> {
+    const model = await this.prisma.products.findFirst({
+      where: {
+        slug,
+      },
+    });
+
+    return model ? ProductPrismaMapper.toEntity(model) : null;
   }
 
   async findAll(): Promise<Product[]> {
@@ -96,7 +105,6 @@ export class ProductPrismaRepository implements IProductRepository {
       where,
       include: {
         category: true,
-        orderItems: true,
       },
       orderBy: {
         createdAt: 'desc',
@@ -106,8 +114,7 @@ export class ProductPrismaRepository implements IProductRepository {
     });
 
     return new ProductSearchResult({
-      //@ts-ignore
-      items: models.map((model) => model),
+      items: models.map((model) => ProductPrismaMapper.toEntity(model)),
       total: count,
       currentPage: props.page,
       perPage: props.perPage,
@@ -126,8 +133,9 @@ export class ProductPrismaRepository implements IProductRepository {
     }
   }
   async delete(id: string): Promise<void> {
-    await this.prisma.categories.delete({
+    await this.prisma.products.delete({
       where: { id },
+
     });
   }
 

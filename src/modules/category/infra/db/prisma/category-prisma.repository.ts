@@ -41,6 +41,20 @@ export class CategoryPrismaRepository implements ICategoryRepository {
     return model ? CategoryPrismaMapper.toEntity(model) : null;
   }
 
+  async findByIds(ids: string[]): Promise<Category[]> {
+    const models = await this.prisma.categories.findMany({
+      where: {
+        id: {
+          in: ids,
+        },
+      },
+    });
+
+    return models.map((model) => {
+      return CategoryPrismaMapper.toEntity(model);
+    });
+  }
+
   async findByName(name: string): Promise<Category | null> {
     const model = await this.prisma.categories.findFirst({
       where: {

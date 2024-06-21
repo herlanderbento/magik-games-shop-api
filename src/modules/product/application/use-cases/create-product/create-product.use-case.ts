@@ -25,6 +25,6 @@ export class CreateProductUseCase
 
     await this.productRepository.insert(entity);
 
-    return ProductOutputMapper.toOutput(entity);
+    return ProductOutputMapper.toOutput(entity, category);
   }
 }

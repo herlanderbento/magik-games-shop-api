@@ -68,5 +68,6 @@ export interface IProductRepository
     >,
     'findByIds'
   > {
+  findBySlug(slug: string): Promise<Product | null>;
   findByName(name: string): Promise<Product | null>;
 }

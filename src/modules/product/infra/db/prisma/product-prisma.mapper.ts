@@ -1,5 +1,5 @@
 import { Products as ProductsModel } from '@prisma/client';
-import { EntityID } from '~/@shared/domain';
+import { EntityID, Slug } from '~/@shared/domain';
 import { Product } from '~/modules/product/domain';
 
 export class ProductPrismaMapper {
@@ -25,6 +25,7 @@ export class ProductPrismaMapper {
         description: model?.description,
         image: model.image,
         price: model.price,
+        slug: Slug.create(model.slug),
         createdAt: model.createdAt,
         updatedAt: model.updatedAt,
       },
