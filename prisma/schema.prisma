@@ -7,6 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Users {
+  id           String   @id @default(uuid())
+  name         String   @db.VarChar(255)
+  slug         String
+  email        String   @db.VarChar(255)
+  password     String   @db.VarChar(255)
+  identityCard String
+  phone        String?  @db.VarChar(15)
+  role         String   @db.VarChar(9)
+  avatar       String?
+  createdAt    DateTime
+  updatedAt    DateTime
+}
+
 model Categories {
   id          String     @id @default(uuid())
   name        String     @db.VarChar(255)

@@ -14,4 +14,10 @@ npm run cti create './src/modules/category/infra' -- -i '*spec.ts' -b &&
 
 npm run cti create './src/modules/product/application' -- -i '*spec.ts' -b && 
 npm run cti create './src/modules/product/domain' -- -i '*spec.ts' -b && 
-npm run cti create './src/modules/product/infra' -- -i '*spec.ts' -b 
+npm run cti create './src/modules/product/infra' -- -i '*spec.ts' -b &&
+
+
+
+npm run cti create './src/modules/account/application' -- -i '*spec.ts' -b && 
+npm run cti create './src/modules/account/domain' -- -i '*spec.ts' -b && 
+npm run cti create './src/modules/account/infra' -- -i '*spec.ts' -b 

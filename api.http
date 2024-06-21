@@ -71,3 +71,14 @@ DELETE http://{{host}}/products/5d775347-2d81-469a-9cfb-5fdf29d969ae
 Content-Type: {{contentType}}
 
 
+### create user
+POST http://{{host}}/users
+Content-Type: {{contentType}}
+
+{
+  "name": "Herlander de Castro Bento",
+  "email": "herlanderbento19@gmail.com",
+  "identityCard": "some identity",
+  "phone": "244948053707",
+  "password": "some password"
+}

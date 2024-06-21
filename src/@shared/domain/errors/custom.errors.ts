@@ -29,10 +29,7 @@ export function sendErrorResponse(err, res: Response) {
     err instanceof ApplicationError
       ? err.statusCode
       : StatusCodes.INTERNAL_SERVER_ERROR;
-  const message =
-    err instanceof ApplicationError
-      ? err.message
-      : 'An unexpected error occurred.';
+  const message = err instanceof ApplicationError ? err.message : err.message;
 
   return res.status(statusCode).json({
     success: false,
